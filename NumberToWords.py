@@ -3,43 +3,35 @@ tens=[""," Ten"," Twenty"," Thirty"," Forty"," Fifty"," Sixty"," Seventy"," Eigh
 
 def inHundred (x):
     h=x//100
-    hw=""
+    hwords=""
     if h>0:
-        hw=words[h]+" Hundred"
+        hwords+=words[h]+" Hundred"
     t=(x%100)
     if t<20:
-        tw=words[t]
-        nw=""
+        hwords+=words[t]
     else:
-        tt=t//10
-        tw=tens[tt]
-        nw=words[t%10]
-    return hw+tw+nw
+        hwords+=tens[t//10]+words[t%10]
+    return hwords
 
 def numToText(num):
     
-    billionsWords=""
-    millionsWords=""
-    thousandsWords=""
-    hundredsWords=""
-
+    text=""
     billions=num//1000000000
     remainder=num%1000000000
     if billions > 0:
-        billionsWords=inHundred(billions)+" Billion"
-
+        text+=inHundred(billions)+" Billion"
+        
     millions=remainder//1000000
     remainder=remainder%1000000
     if millions > 0:
-        millionsWords=inHundred(millions)+" Million"
-
+        text+=inHundred(millions)+" Million"
+        
     thousands=remainder//1000
     remainder=remainder%1000
     if thousands > 0:
-        thousandsWords=inHundred(thousands)+" Thousand"
-
-    hundredsWords=inHundred(remainder)
-    text=billionsWords+millionsWords+thousandsWords+hundredsWords
+        text+=inHundred(thousands)+" Thousand"
+        
+    text+=inHundred(remainder)
 
     if text=="":
         text="Zero"
